@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.14.2, 2021-09-16T15:10:43. -->
+<!-- Written by QtCreator 4.14.2, 2021-09-17T23:25:45. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -294,8 +294,9 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/acer/Documents/SEMESTRE ll/INFORMÁTICA ll/PARCIAL 2/AppImagnes/AppImagnes.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/acer/Documents/SEMESTRE ll/INFORMÁTICA ll/PARCIAL 2/AppImagnes/AppImagnes.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">AppImagnes2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/acer/Documents/SEMESTRE ll/INFORMÁTICA ll/Parcial2-Informatica2/CODIGO/AppImagnes/AppImagnes.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/acer/Documents/SEMESTRE ll/INFORMÁTICA ll/Parcial2-Informatica2/CODIGO/AppImagnes/AppImagnes.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
