@@ -4,4 +4,8 @@ CONFIG -= app_bundle
 #CONFIG -= qt
 
 SOURCES += \
+        RW_files.cpp \
         main.cpp
+
+HEADERS += \
+    RW_files.h
