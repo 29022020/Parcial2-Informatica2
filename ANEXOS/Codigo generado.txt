@@ -1,0 +1,23 @@
+#include <Adafruit_NeoPixel.h>
+
+#define LED_PIN 2
+
+#define LED_COUNT 8
+
+Adafruit_NeoPixel leds(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
+
+
+
+void setup(){
+  
+  leds.begin();
+    
+    for(int i=0;i<LED_COUNT;i++){
+    leds.setPixelColor(i, 207, 80, 40);
+  }
+  
+  leds.show();
+  
+}
+
+void loop(){}
