@@ -64,6 +64,7 @@ void CreateTxt(QImage *im, string RedFile_, string BlueFile_, string GreenFile_)
         RedFile_+='\n';
         BlueFile_+='\n';
         GreenFile_+='\n';
+
         }
 
     }
