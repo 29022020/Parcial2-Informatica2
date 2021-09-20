@@ -4,10 +4,10 @@
 
 using namespace std;
 
-void CreateTxt(QImage *im, string RedFile_, string BlueFile_, string GreenFile_);
-
 string CharToString(char array[]);
 
+
+void CreateTxt(QImage *im, string RedFile_, string BlueFile_, string GreenFile_);
 int main()
 {
     string filename="colombia.png";
