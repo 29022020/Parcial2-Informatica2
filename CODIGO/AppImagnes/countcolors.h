@@ -14,7 +14,15 @@ public:
 
     int myNumOfColors;
 
+    countColors();
+
     countColors(vector <int> myColor_);
+
+    int getMyNumOfColors() const;
+
+    void setMyNumOfColors(int value);
+
+    vector<int> getMyColor() const;
 };
 
 #endif // COUNTCOLORS_H

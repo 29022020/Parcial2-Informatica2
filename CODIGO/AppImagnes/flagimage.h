@@ -36,6 +36,8 @@ private:
 
     void CreatePixeles();
 
+    void genTheTxtPixels();
+
 };
 
 #endif // FLAGIMAGE_H

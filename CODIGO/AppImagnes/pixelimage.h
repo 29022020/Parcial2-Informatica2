@@ -6,6 +6,7 @@
 #include <array>
 #include <vector>
 #include <QImage>
+#include "countcolors.h"
 
 
 using namespace std;
@@ -17,8 +18,6 @@ public:
     PixelImage();
 
     PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPixel_End_, int WidthPixel_End_, QImage &MyImage);
-
-
 
     vector<int> getMyColor() const;
 

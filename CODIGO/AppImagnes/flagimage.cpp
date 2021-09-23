@@ -144,4 +144,11 @@ void FlagImage::CreatePixeles()
    }
 
 
+
+
+}
+
+void FlagImage::genTheTxtPixels()
+{
+
 }
