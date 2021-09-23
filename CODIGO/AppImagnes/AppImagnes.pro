@@ -5,11 +5,13 @@ CONFIG -= app_bundle
 
 SOURCES += \
         RW_files.cpp \
+        countcolors.cpp \
         flagimage.cpp \
         main.cpp \
         pixelimage.cpp
 
 HEADERS += \
     RW_files.h \
+    countcolors.h \
     flagimage.h \
     pixelimage.h

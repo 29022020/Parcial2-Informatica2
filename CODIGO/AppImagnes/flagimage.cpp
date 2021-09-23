@@ -71,19 +71,75 @@ void FlagImage::CreatePixeles()
 
    int Height_=getHeight()/16;
 
-   int ContX=0;
+   int FaulPixelesWidth=getWidth()%16;
 
-   int ContY=0;
+   int FaulPixelesHeight=getHeight()%16;
 
-   for(int i=0; i<getWidth(); i+=Width_){
+   int LastValueW=0;
+
+   int LastValueH=0;
+
+   int contX=1;
+
+   int contY=1;
+
+   for(int i=0; i<=getHeight(); i+= Height_){
 
 
-       for(int j=0; j<getHeight(); j+=Height_){
+       for(int j=0; j<=getWidth(); j+=Width_){
 
-          PixelImage element(Height_, Width_, i, j);
-          MatrizLeds[ContX][ContY]=element;
+
+          if(j!=getWidth() && i!=getHeight()){
+
+          PixelImage element(LastValueH, LastValueW, i, j, *Image);
+          MatrizLeds[contX][contY]=element;
+
+          contX++;
+
+          LastValueH=j;
+
+          }else if(j==getWidth() && i!=getHeight()){
+
+
+              PixelImage element(LastValueH, LastValueW, i, j+FaulPixelesWidth, *Image);
+              MatrizLeds[contX][contY]=element;
+
+              contX++;
+
+              LastValueH=j;
+
+
+          }
+          else if(j!=getWidth() && i==getHeight()){
+
+
+                        PixelImage element(LastValueH, LastValueW, i+FaulPixelesHeight, j, *Image);
+                        MatrizLeds[contX][contY]=element;
+
+                        contX++;
+
+                        LastValueH=j;
+
+
+           }else if(j==getWidth() && i==getHeight()){
+
+
+              PixelImage element(LastValueH, LastValueW, i+FaulPixelesHeight, j+FaulPixelesWidth, *Image);
+              MatrizLeds[contX][contY]=element;
+
+              contX++;
+
+              LastValueH=j;
+
+
+          }
 
        }
+
+       contX=0;
+       contY++;
+
+       LastValueW=i;
 
    }
 

@@ -5,27 +5,42 @@
 #include "RW_files.h"
 #include <array>
 #include <vector>
+#include <QImage>
+
 
 using namespace std;
 
 class PixelImage
-
 {
 public:
 
     PixelImage();
 
-    PixelImage(int HeightPixel_, int WidthPixel_, int AreaHPixel_, int AreaWPixel_);
+    PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPixel_End_, int WidthPixel_End_, QImage &MyImage);
+
+
+
+    vector<int> getMyColor() const;
 
 private:
 
-    int HeightPixel;
+    int HeightPixel_Init;
 
-    int WidthPixel;
+    int WidthPixel_Init;
 
-    int AreaHPixel;
+    int HeightPixel_End;
 
-    int AreaWPixel;
+    int WidthPixel_End;
+
+    bool operator ==(const vector<int> &elemet1)const;
+
+    vector <vector<int>> MyAreaOfPixeles;
+
+    vector<int> MyColor;
+
+    bool comparateVector(vector<int> elemnt1, vector<int> elemnt2);
+
+    void getMyColor();
 
 };
 
