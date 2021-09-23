@@ -40,6 +40,8 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
 
     }
 
+    getMyColor();
+
 }
 
 vector<int> PixelImage::getMyColor() const
@@ -65,17 +67,66 @@ void PixelImage::getMyColor()
 {
     vector <int> aux;
 
-    vector<vector <int>> DifVectors;
+    bool flag=true;
+
+    vector <countColors> ColorsArea;
 
     for(auto valor : MyAreaOfPixeles){
 
+        if(ColorsArea.empty()){
 
-        for(auto value: DifVectors){
+        for(auto value: ColorsArea){
 
-          //Comparar los vectores, y contar cuantos pixeles hay de cada color, para hallar el mas abundante
+            if(comparateVector(value.getMyColor(), valor)){
+
+                value.setMyNumOfColors(value.getMyNumOfColors()+1);
+
+                flag=false;
+
+            }
+
 
         }
 
+        if(flag){
+
+            countColors element(valor);
+            ColorsArea.push_back(element);
+
+        }
+
+        }
+        else{
+
+          countColors element(valor);
+          ColorsArea.push_back(element);
+
+        }
+
+        flag=true;
+
     }
+
+    countColors MyUniqueColor;
+
+    bool flag2=true;
+
+    for(auto value : ColorsArea){
+
+        if(flag2){
+
+        }
+        else{
+
+            if(value.getMyNumOfColors()>MyUniqueColor.getMyNumOfColors()){
+
+                MyUniqueColor=value;
+
+            }
+        }
+
+    }
+
+    MyColor=MyUniqueColor.getMyColor();
 
 }
