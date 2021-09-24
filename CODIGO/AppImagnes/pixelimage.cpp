@@ -142,11 +142,11 @@ void PixelImage::getMyColor()
     for(auto valou: MyColor){
         if(cont==1){
 
-            cout<<endl<<endl<<"My color is: Red="<<valou<<endl;
+            cout<<endl<<endl<<"My color is: Blue="<<valou<<endl;
         }
         if(cont==2){
 
-            cout<<endl<<endl<<"My color is: Blue="<<valou<<endl;
+            cout<<endl<<endl<<"My color is: Red="<<valou<<endl;
         }
         if(cont==3){
 

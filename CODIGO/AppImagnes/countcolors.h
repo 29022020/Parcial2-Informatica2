@@ -5,7 +5,11 @@
 #include <vector>
 
 using namespace std;
-
+/////////////
+/// \brief The countColors class
+///CLASE QUE AYUDA AL PIXEL EN LA BUSQUEDA
+/// DEL PIXEL DE REPRENTACIÓN
+///
 class countColors
 {
 public:
@@ -23,6 +27,7 @@ public:
     void setMyNumOfColors(int value);
 
     vector<int> getMyColor() const;
+
 };
 
 #endif // COUNTCOLORS_H

@@ -7,6 +7,17 @@
 #include <vector>
 #include "pixelimage.h"
 
+////////////////////////////////
+///
+/// CLASE QUE RECIBE LA IMAGEN DEL USUARIO
+///
+/// ANALIZAR LA IMAGEN
+/// PARA TRANSFORMARLA EN LA MATRIZ DE LEDS RGB
+///
+/// A TRAVÉS DEL SUBMUESTREO Y EL SOBREMUESTREO
+///
+/// PARA EXPORTAR EL CODIGO A USAR EN TINKERCAD
+
 using namespace std;
 
 
@@ -36,7 +47,7 @@ private:
 
     void CreateTxt(QImage *im, string RedFile_, string BlueFile_, string GreenFile_);
 
-    void CreatePixeles();
+    void CreatePixeles();//Crear la division areas dentro de la imagen
 
     void genTheTxtPixels();
 
