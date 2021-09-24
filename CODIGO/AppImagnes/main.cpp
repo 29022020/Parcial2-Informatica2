@@ -26,6 +26,7 @@ int main()
    // cout << "Valor en BLUE del pixel selccionado: "<<im.pixelColor(pixelX, pixelY).blue()<<endl;
    // cout << "Valor en GREEN del pixel selccionado: "<<im.pixelColor(pixelX, pixelY).green()<<endl;
 
+
     cout << "The size of the image is: "<<im.width()<<" | "<<im.height()<<endl;
 
     string RedFile="";
@@ -34,7 +35,7 @@ int main()
 
     CreateTxt(&im, RedFile, BlueFile, GreemFile);
 
-    FlagImage myImage(filename);
+  FlagImage myImage(filename);
 
     return 0;
 

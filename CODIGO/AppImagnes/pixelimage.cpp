@@ -22,7 +22,7 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
 
     for(int indy=HeightPixel_Init; indy<=HeightPixel_End; indy++){
 
-            for(int indx=WidthPixel_Init; indx <= WidthPixel_End; indx++){
+            for(int indx=WidthPixel_Init; indx <=WidthPixel_End; indx++){
 
 
                    BlueValor=MyImage.pixelColor(indx, indy).blue();
@@ -54,9 +54,10 @@ vector<int> PixelImage::getMyColor() const
 
 bool PixelImage::comparateVector(vector<int> elemnt1, vector<int> elemnt2)
 {
+
     for(int i=0; i<3; i++){
 
-        if(elemnt1[i]!=elemnt2[i]){
+        if(elemnt1.at(i)!=elemnt2.at(i)){
 
             return false;
         }
@@ -68,6 +69,7 @@ bool PixelImage::comparateVector(vector<int> elemnt1, vector<int> elemnt2)
 
 void PixelImage::getMyColor()
 {
+
     vector <int> aux;
 
     bool flag=true;
@@ -76,17 +78,17 @@ void PixelImage::getMyColor()
 
     for(auto valor : MyAreaOfPixeles){
 
-        if(ColorsArea.empty()){
+        if(!ColorsArea.empty()){
 
         for(auto value: ColorsArea){
 
-            if(comparateVector(value.getMyColor(), valor)){
+        if(comparateVector(value.getMyColor(), valor)){
 
                 value.setMyNumOfColors(value.getMyNumOfColors()+1);
 
                 flag=false;
 
-            }
+        }
 
 
         }
@@ -118,6 +120,10 @@ void PixelImage::getMyColor()
 
         if(flag2){
 
+            MyUniqueColor=value;
+
+            flag=false;
+
         }
         else{
 
@@ -131,6 +137,25 @@ void PixelImage::getMyColor()
     }
 
     MyColor=MyUniqueColor.getMyColor();
+    int cont=1;
+
+    for(auto valou: MyColor){
+        if(cont==1){
+
+            cout<<endl<<endl<<"My color is: Red="<<valou<<endl;
+        }
+        if(cont==2){
+
+            cout<<endl<<endl<<"My color is: Blue="<<valou<<endl;
+        }
+        if(cont==3){
+
+            cout<<endl<<endl<<"My color is: Green="<<valou<<endl;
+        }
+        cont++;
+
+    }
+
 
 
 
