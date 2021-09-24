@@ -7,6 +7,9 @@ PixelImage::PixelImage()
 
 PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPixel_End_, int WidthPixel_End_, QImage &MyImage)
 {
+
+    cout<<"New Pixel"<<endl;
+
     HeightPixel_Init=HeightPixel_Init_;
 
     WidthPixel_Init=WidthPixel_Init_;
@@ -19,7 +22,7 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
 
     for(int indy=HeightPixel_Init; indy<=HeightPixel_End; indy++){
 
-            for(int indx=WidthPixel_Init; indx < WidthPixel_End; indx++){
+            for(int indx=WidthPixel_Init; indx <= WidthPixel_End; indx++){
 
 
                    BlueValor=MyImage.pixelColor(indx, indy).blue();
@@ -128,5 +131,7 @@ void PixelImage::getMyColor()
     }
 
     MyColor=MyUniqueColor.getMyColor();
+
+
 
 }

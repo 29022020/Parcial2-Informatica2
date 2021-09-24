@@ -1,6 +1,7 @@
 #include <iostream>
 #include <QImage>
 #include "RW_files.h"
+#include "flagimage.h"
 
 using namespace std;
 
@@ -10,12 +11,12 @@ string CharToString(char array[]);
 void CreateTxt(QImage *im, string RedFile_, string BlueFile_, string GreenFile_);
 int main()
 {
-    string filename="colombia.png";
+    QString filename=":/new/prefix1/Imagenes/colombia.png";
 
-    QImage im(filename.c_str());
+    QImage im(filename);
 
-    unsigned int pixelX=50;
-    unsigned int pixelY=70;
+    //unsigned int pixelX=50;
+    //unsigned int pixelY=70;
 
     //QSize sizeImg=im.size();
 
@@ -32,6 +33,8 @@ int main()
     string GreemFile="";
 
     CreateTxt(&im, RedFile, BlueFile, GreemFile);
+
+    FlagImage myImage(filename);
 
     return 0;
 
