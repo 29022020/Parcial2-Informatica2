@@ -26,6 +26,8 @@ public:
 
     int getWidth() const;
 
+    void ShowMyPixeles();
+
 private:
 
     int Height;
@@ -37,6 +39,7 @@ private:
     void CreatePixeles();
 
     void genTheTxtPixels();
+
 
 };
 

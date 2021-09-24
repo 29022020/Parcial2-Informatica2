@@ -13,6 +13,8 @@ FlagImage::FlagImage(QString ruta)
     Width=Image->width();
     Height=Image->height();
 
+    CreatePixeles();
+
 }
 
 int FlagImage::getHeight() const
@@ -23,6 +25,19 @@ int FlagImage::getHeight() const
 int FlagImage::getWidth() const
 {
     return Width;
+}
+
+void FlagImage::ShowMyPixeles()
+{
+
+    for(int i=0; i<16; i++){
+
+        for(int j=0; j<16; j++){
+
+            //cout<<"Pixel["<<i<<"]["<<j<<"]= "<<MatrizLeds.at(i).at(j).getMyColor().at(0)<<endl;
+
+        }
+    }
 }
 
 void FlagImage::CreateTxt(QImage *im, string RedFile_, string BlueFile_, string GreenFile_)
@@ -79,17 +94,25 @@ void FlagImage::CreatePixeles()
 
    int LastValueH=0;
 
-   int contX=1;
+   int contX=0;
 
-   int contY=1;
+   int contY=0;
 
-   for(int i=0; i<=getHeight(); i+= Height_){
+   cout<<Width_<<" | "<<Height_<<endl<<endl;
 
+   cout<<getHeight()<<" | "<<getWidth()<<endl;
 
-       for(int j=0; j<=getWidth(); j+=Width_){
+   for(int i=Height_; i<=getHeight(); i+= Height_){
 
+       cout<<endl<<"Colum: "<<i<<endl<<endl;
 
-          if(j!=getWidth() && i!=getHeight()){
+       for(int j=Width_; j<=getWidth(); j+=Width_){
+
+          cout<<"Pixels["<<contX<<"]["<<contY<<"]= ";
+
+          if(j!=getWidth()-FaulPixelesWidth && i!=getHeight()-FaulPixelesHeight){
+
+          cout<<"0: ("<<LastValueH<<", " <<LastValueW<<", " <<i<<", " << j<<") "<<endl;
 
           PixelImage element(LastValueH, LastValueW, i, j, *Image);
           MatrizLeds[contX][contY]=element;
@@ -98,8 +121,9 @@ void FlagImage::CreatePixeles()
 
           LastValueH=j;
 
-          }else if(j==getWidth() && i!=getHeight()){
+          }else if(j==getWidth()-FaulPixelesWidth && i!=getHeight()-FaulPixelesHeight){
 
+              cout<<"1: ("<<LastValueH<<", " <<LastValueW<<", " <<i<<", " << j+FaulPixelesWidth<<") "<<endl;
 
               PixelImage element(LastValueH, LastValueW, i, j+FaulPixelesWidth, *Image);
               MatrizLeds[contX][contY]=element;
@@ -110,7 +134,9 @@ void FlagImage::CreatePixeles()
 
 
           }
-          else if(j!=getWidth() && i==getHeight()){
+          else if(j!=getWidth()-FaulPixelesWidth && i==getHeight()-FaulPixelesHeight){
+
+                        cout<<"2: ("<<LastValueH<<", " <<LastValueW<<", " <<+FaulPixelesHeight<<", " << j<<") "<<endl;
 
 
                         PixelImage element(LastValueH, LastValueW, i+FaulPixelesHeight, j, *Image);
@@ -121,20 +147,27 @@ void FlagImage::CreatePixeles()
                         LastValueH=j;
 
 
-           }else if(j==getWidth() && i==getHeight()){
+           }else if(j==getWidth()-FaulPixelesWidth && i==getHeight()-FaulPixelesHeight){
 
 
-              PixelImage element(LastValueH, LastValueW, i+FaulPixelesHeight, j+FaulPixelesWidth, *Image);
+             cout<<"3: ("<<LastValueH<<", " <<LastValueW<<", " <<i+FaulPixelesHeight<<", " << j+FaulPixelesWidth<<") "<<endl;
+
+             PixelImage element(LastValueH, LastValueW, i+FaulPixelesHeight, j+FaulPixelesWidth, *Image);
               MatrizLeds[contX][contY]=element;
 
               contX++;
-
               LastValueH=j;
 
 
           }
 
+          //contX++;
+
+
+
        }
+
+       cout<<endl;
 
        contX=0;
        contY++;

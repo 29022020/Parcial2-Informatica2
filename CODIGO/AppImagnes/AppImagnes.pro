@@ -15,3 +15,6 @@ HEADERS += \
     countcolors.h \
     flagimage.h \
     pixelimage.h
+
+RESOURCES += \
+    images.qrc
