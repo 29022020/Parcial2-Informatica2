@@ -8,7 +8,11 @@
 #include <QImage>
 #include "countcolors.h"
 
-
+///////////////////////////////
+///
+///CLASE QUE VA A TENER EL AREA QUE SE LE ASIGNE DE LA IMAGEN
+/// PARA SABER CUAL ES EL COLOR EN TÉRMINOS DE VALORES RGB
+/// QUE MÁS PREDOMINA EN LA AREA ASIGNADA DE LA IMAGEN
 using namespace std;
 
 class PixelImage
@@ -31,15 +35,13 @@ private:
 
     int WidthPixel_End;
 
-    bool operator ==(const vector<int> &elemet1)const;
+    vector <vector<int>> MyAreaOfPixeles; //Pixeles de mi area
 
-    vector <vector<int>> MyAreaOfPixeles;
+    vector<int> MyColor;  //Pixel de representación
 
-    vector<int> MyColor;
+    bool comparateVector(vector<int> elemnt1, vector<int> elemnt2);//Comparar los valores de dos pixeles, para saber si son iguales
 
-    bool comparateVector(vector<int> elemnt1, vector<int> elemnt2);
-
-    void getMyColor();
+    void getMyColor();  //Para obtener mi pixel de representación
 
 };
 
