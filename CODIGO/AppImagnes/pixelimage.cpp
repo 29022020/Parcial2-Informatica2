@@ -138,7 +138,7 @@ void PixelImage::getMyColor()
 
     MyColor=MyUniqueColor.getMyColor();
     int cont=1;
-
+    cout<<endl;
     for(auto valou: MyColor){
         if(cont==1){
 
@@ -155,6 +155,8 @@ void PixelImage::getMyColor()
         cont++;
 
     }
+
+    cout<<endl;
 
 
 
