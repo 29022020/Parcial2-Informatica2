@@ -92,7 +92,7 @@ void FlagImage::CreatePixeles()
 
    if(FaulPixelesHeight!=0){
 
-      FaulPixelesHeight+=-1;
+     FaulPixelesHeight+=-1;
    }
    if(FaulPixelesWidth!=0){
 
@@ -111,15 +111,17 @@ void FlagImage::CreatePixeles()
 
    cout<<getHeight()<<" | "<<getWidth()<<endl;
 
+   cout<<FaulPixelesHeight<<" | "<<FaulPixelesWidth<<endl;
+
    for(int i=Height_; i<=getHeight()-1; i+= Height_){
 
        cout<<endl<<"Colum: "<<i<<endl<<endl;
 
-       for(int j=Width_; j<=getWidth()-1; j+=Width_){
+       for(int j=Width_; j<=getWidth(); j+=Width_){
 
           cout<<"Pixels["<<contX<<"]["<<contY<<"]= ";
 
-          if(j!=getWidth()-FaulPixelesWidth && i!=getHeight()-FaulPixelesHeight){
+          if(j!=getWidth()-FaulPixelesWidth-1 && i!=getHeight()-FaulPixelesHeight-1){
 
           cout<<"0: ("<<LastValueH<<", " <<LastValueW<<", " <<i<<", " << j<<") "<<endl;
 
@@ -128,7 +130,7 @@ void FlagImage::CreatePixeles()
 
           contX++;
 
-          }else if(j==getWidth()-FaulPixelesWidth && i!=getHeight()-FaulPixelesHeight){
+          }else if(j==getWidth()-FaulPixelesWidth-1 && i!=getHeight()-FaulPixelesHeight-1){
 
               cout<<"1: ("<<LastValueH<<", " <<LastValueW<<", " <<i<<", " << j+FaulPixelesWidth<<") "<<endl;
 
@@ -139,7 +141,7 @@ void FlagImage::CreatePixeles()
 
 
           }
-          else if(j!=getWidth()-FaulPixelesWidth && i==getHeight()-FaulPixelesHeight){
+          else if(j!=getWidth()-FaulPixelesWidth-1 && i==getHeight()-FaulPixelesHeight-1){
 
                         cout<<"2: ("<<LastValueH<<", " <<LastValueW<<", " <<i+FaulPixelesHeight<<", " << j<<") "<<endl;
 
@@ -150,7 +152,7 @@ void FlagImage::CreatePixeles()
                         contX++;
 
 
-           }else if(j==getWidth()-FaulPixelesWidth && i==getHeight()-FaulPixelesHeight){
+           }else if(j==getWidth()-FaulPixelesWidth-1 && i==getHeight()-FaulPixelesHeight-1){
 
 
              cout<<"3: ("<<LastValueH<<", " <<LastValueW<<", " <<i+FaulPixelesHeight<<", " << j+FaulPixelesWidth<<") ,";
@@ -182,6 +184,76 @@ void FlagImage::CreatePixeles()
 
    }
 
+
+
+
+}
+
+void FlagImage::CreatePixeles2()
+{
+
+    float Width_=getWidth()/16;  //0.625
+
+    float Height_=getHeight()/16;  //0.375
+
+    float FaulPixelesWidth=getWidth()%16;
+
+    float FaulPixelesHeight=getHeight()%16;
+
+    int LastValueW=0;
+
+    int LastValueH=0;
+
+    int contX=0;
+
+    int contY=0;
+
+    int aux1=0;
+
+    int aux2=0;
+
+    int BlueValor, RedValor, GreenValor;
+
+    for(int i=Height_; i<=getHeight()-1; i+= Height_){
+
+         aux1+=i;
+
+         if(aux1>=1){
+
+             contY++;
+         }
+
+        for(int j=Width_; j<=getWidth(); j+=Width_){
+
+            aux2+=j;
+
+            if(aux2>=1){
+
+                contX++;
+            }
+
+            BlueValor=(*Image).pixelColor(contX, contY).blue();
+            RedValor=(*Image).pixelColor(contX, contY).red();
+            GreenValor=(*Image).pixelColor(contX, contY).green();
+
+           vector <int>*AuxVector=new vector <int>;
+
+            AuxVector->push_back(RedValor);
+            AuxVector->push_back(GreenValor);
+            AuxVector->push_back(BlueValor);
+
+            //MyAreaOfPixeles.push_back(*AuxVector);
+
+            delete AuxVector;
+
+
+
+           }
+
+      contX=0;
+
+
+    }
 
 
 

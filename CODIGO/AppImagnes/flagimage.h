@@ -49,6 +49,8 @@ private:
 
     void CreatePixeles();//Crear la division areas dentro de la imagen
 
+    void CreatePixeles2();
+
     void genTheTxtPixels();
 
 

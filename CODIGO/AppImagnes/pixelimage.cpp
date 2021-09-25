@@ -31,9 +31,9 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
 
                    vector <int>*AuxVector=new vector <int>;
 
-                   AuxVector->push_back(BlueValor);
                    AuxVector->push_back(RedValor);
                    AuxVector->push_back(GreenValor);
+                   AuxVector->push_back(BlueValor);     
 
                    MyAreaOfPixeles.push_back(*AuxVector);
 
@@ -142,20 +142,23 @@ void PixelImage::getMyColor()
     for(auto valou: MyColor){
         if(cont==1){
 
-            cout<<endl<<endl<<"My color is: Blue="<<valou<<endl;
+            cout<<endl<<endl<<"My color is: Red="<<valou<<endl;
+
         }
         if(cont==2){
 
-            cout<<endl<<endl<<"My color is: Red="<<valou<<endl;
+            cout<<endl<<endl<<"My color is: Green="<<valou<<endl;
         }
         if(cont==3){
 
-            cout<<endl<<endl<<"My color is: Green="<<valou<<endl;
+            cout<<endl<<endl<<"My color is: Blue="<<valou<<endl;
+
         }
         cont++;
 
     }
 
+    cout<<endl;
     cout<<endl;
 
 
