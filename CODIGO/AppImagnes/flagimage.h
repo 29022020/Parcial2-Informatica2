@@ -33,6 +33,8 @@ public:
 
     array <array <PixelImage, 16>, 16> MatrizLeds;
 
+    vector<vector <int>> *MatrizPixels;
+
     int getHeight() const;
 
     int getWidth() const;

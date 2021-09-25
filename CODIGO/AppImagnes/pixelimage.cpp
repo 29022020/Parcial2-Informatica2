@@ -5,7 +5,7 @@ PixelImage::PixelImage()
 
 }
 
-PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPixel_End_, int WidthPixel_End_, QImage &MyImage)
+PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPixel_End_, int WidthPixel_End_, QImage &MyImage,  vector<vector <int>> *MatrizPixelsCopy)
 {
 
     cout<<"New Pixel"<<endl;
@@ -137,6 +137,9 @@ void PixelImage::getMyColor()
     }
 
     MyColor=MyUniqueColor.getMyColor();
+
+    MatrizPixelsCopy->push_back(MyColor);
+
     int cont=1;
     cout<<endl;
     for(auto valou: MyColor){

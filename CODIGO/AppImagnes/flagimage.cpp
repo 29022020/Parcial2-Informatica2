@@ -10,10 +10,14 @@ FlagImage::FlagImage(QString ruta)
 
     Image=new QImage(ruta);
 
+    MatrizPixels = new vector<vector <int>>;
+
     Width=Image->width();
     Height=Image->height();
 
     CreatePixeles();
+
+    genTheTxtPixels();
 
 }
 
@@ -125,7 +129,7 @@ void FlagImage::CreatePixeles()
 
           cout<<"0: ("<<LastValueH<<", " <<LastValueW<<", " <<i<<", " << j<<") "<<endl;
 
-          PixelImage element(LastValueH, LastValueW, i, j, *Image);
+          PixelImage element(LastValueH, LastValueW, i, j, *Image, MatrizPixels);
           MatrizLeds[contX][contY]=element;
 
           contX++;
@@ -134,7 +138,7 @@ void FlagImage::CreatePixeles()
 
               cout<<"1: ("<<LastValueH<<", " <<LastValueW<<", " <<i<<", " << j+FaulPixelesWidth<<") "<<endl;
 
-              PixelImage element(LastValueH, LastValueW, i, j+FaulPixelesWidth, *Image);
+              PixelImage element(LastValueH, LastValueW, i, j+FaulPixelesWidth, *Image, MatrizPixels);
               MatrizLeds[contX][contY]=element;
 
               contX++;
@@ -146,7 +150,7 @@ void FlagImage::CreatePixeles()
                         cout<<"2: ("<<LastValueH<<", " <<LastValueW<<", " <<i+FaulPixelesHeight<<", " << j<<") "<<endl;
 
 
-                        PixelImage element(LastValueH, LastValueW, i+FaulPixelesHeight, j, *Image);
+                        PixelImage element(LastValueH, LastValueW, i+FaulPixelesHeight, j, *Image, MatrizPixels);
                         MatrizLeds[contX][contY]=element;
 
                         contX++;
@@ -157,7 +161,7 @@ void FlagImage::CreatePixeles()
 
              cout<<"3: ("<<LastValueH<<", " <<LastValueW<<", " <<i+FaulPixelesHeight<<", " << j+FaulPixelesWidth<<") ,";
 
-             PixelImage element(LastValueH, LastValueW, i+FaulPixelesHeight, j+FaulPixelesWidth, *Image);
+             PixelImage element(LastValueH, LastValueW, i+FaulPixelesHeight, j+FaulPixelesWidth, *Image, MatrizPixels);
               MatrizLeds[contX][contY]=element;
 
               contX++;
@@ -261,5 +265,55 @@ void FlagImage::CreatePixeles2()
 
 void FlagImage::genTheTxtPixels()
 {
+    string MatrizLeds="";
+
+    int contX=0;
+
+    int contY=0;
+
+    for(auto value: *MatrizPixels){
+
+        if(contX==0){
+
+           MatrizLeds+="{{ "+to_string(value[0])+", "+to_string(value[1])+", "+to_string(value[2])+"}, ";
+
+             contY++;
+
+        }else if(contX==255){
+
+            MatrizLeds+="{ "+to_string(value[0])+", "+to_string(value[1])+", "+to_string(value[2])+"}}";
+
+           contY++;
+
+
+
+
+        }else{
+
+
+            MatrizLeds+="{ "+to_string(value[0])+", "+to_string(value[1])+", "+to_string(value[2])+"}, ";
+
+            contY++;
+
+
+        }
+
+
+        contX++;
+
+        if(contY==16){
+
+        MatrizLeds+="\n";
+
+        contY=0;
+
+        }
+
+    }
+
+
+    escribir("MyFile.txt", MatrizLeds);
+
+
 
 }
