@@ -128,8 +128,6 @@ void FlagImage::CreatePixeles()
 
           contX++;
 
-          LastValueH=j;
-
           }else if(j==getWidth()-FaulPixelesWidth && i!=getHeight()-FaulPixelesHeight){
 
               cout<<"1: ("<<LastValueH<<", " <<LastValueW<<", " <<i<<", " << j+FaulPixelesWidth<<") "<<endl;
@@ -138,8 +136,6 @@ void FlagImage::CreatePixeles()
               MatrizLeds[contX][contY]=element;
 
               contX++;
-
-              LastValueH=j;
 
 
           }
@@ -153,8 +149,6 @@ void FlagImage::CreatePixeles()
 
                         contX++;
 
-                        LastValueH=j;
-
 
            }else if(j==getWidth()-FaulPixelesWidth && i==getHeight()-FaulPixelesHeight){
 
@@ -165,10 +159,11 @@ void FlagImage::CreatePixeles()
               MatrizLeds[contX][contY]=element;
 
               contX++;
-              LastValueH=j;
 
 
           }
+
+          LastValueW=j;
 
           //contX++;
 
@@ -181,8 +176,9 @@ void FlagImage::CreatePixeles()
 
        contX=0;
        contY++;
-       LastValueH=0;
-       LastValueW=i;
+       LastValueH=i;
+
+       LastValueW=0;
 
    }
 
