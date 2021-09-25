@@ -3,5 +3,6 @@
         <file>Imagenes/colombia.png</file>
         <file>Imagenes/japan.png</file>
         <file>Imagenes/usa.png</file>
+        <file>Imagenes/colombiamin.png</file>
     </qresource>
 </RCC>
