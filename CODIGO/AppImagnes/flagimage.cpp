@@ -15,7 +15,7 @@ FlagImage::FlagImage(QString ruta)
     Width=Image->width();
     Height=Image->height();
 
-    CreatePixeles();
+    CreatePixeles2();
 
     genTheTxtPixels();
 
@@ -218,7 +218,7 @@ void FlagImage::CreatePixeles2()
 
     int BlueValor, RedValor, GreenValor;
 
-    for(int i=Height_; i<=getHeight()-1; i+= Height_){
+    for(int i=Height_; i<getHeight(); i+= Height_){
 
          aux1+=i;
 
@@ -227,7 +227,7 @@ void FlagImage::CreatePixeles2()
              contY++;
          }
 
-        for(int j=Width_; j<=getWidth(); j+=Width_){
+        for(int j=Width_; j<getWidth(); j+=Width_){
 
             aux2+=j;
 
@@ -246,7 +246,7 @@ void FlagImage::CreatePixeles2()
             AuxVector->push_back(GreenValor);
             AuxVector->push_back(BlueValor);
 
-            //MyAreaOfPixeles.push_back(*AuxVector);
+            MatrizPixels->push_back(*AuxVector);
 
             delete AuxVector;
 
@@ -261,6 +261,8 @@ void FlagImage::CreatePixeles2()
 
 
 
+
+
 }
 
 void FlagImage::genTheTxtPixels()
@@ -270,6 +272,8 @@ void FlagImage::genTheTxtPixels()
     int contX=0;
 
     int contY=0;
+
+
 
     for(auto value: *MatrizPixels){
 
@@ -281,7 +285,7 @@ void FlagImage::genTheTxtPixels()
 
         }else if(contX==255){
 
-            MatrizLeds+="{ "+to_string(value[0])+", "+to_string(value[1])+", "+to_string(value[2])+"}}";
+            MatrizLeds+="{ "+to_string(value[0])+", "+to_string(value[1])+", "+to_string(value[2])+"}};";
 
            contY++;
 
