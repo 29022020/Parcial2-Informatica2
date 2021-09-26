@@ -80,7 +80,7 @@ void FlagImage::CreateTxt(QImage *im, string RedFile_, string BlueFile_, string 
     escribir("Blue_file.txt", BlueFile_);
     escribir("Green_file.txt", GreenFile_);
 
-    cout << endl<<"Job Done"<<endl;
+
 
 }
 
@@ -196,9 +196,9 @@ void FlagImage::CreatePixeles()
 void FlagImage::CreatePixeles2()
 {
 
-    float Width_=getWidth()/16;  //0.625
+    float Width_=float(getWidth())/16.0;  //0.75
 
-    float Height_=getHeight()/16;  //0.375
+    float Height_=float(getHeight())/16.0;  //0.5
 
     float FaulPixelesWidth=getWidth()%16;
 
@@ -212,33 +212,29 @@ void FlagImage::CreatePixeles2()
 
     int contY=0;
 
-    int aux1=0;
+    int contX1=0;
 
-    int aux2=0;
+    int contY1=0;
+
+    float aux1=0;
+
+    float aux2=0;
 
     int BlueValor, RedValor, GreenValor;
 
-    for(int i=Height_; i<getHeight(); i+= Height_){
+    cout<<Width_<<"||"<<Height_<<endl;
 
-         aux1+=i;
+    for(int i=1; i<=16; i++){
 
-         if(aux1>=1){
 
-             contY++;
-         }
+        for(int j=1; j<=16; j++){
 
-        for(int j=Width_; j<getWidth(); j+=Width_){
-
-            aux2+=j;
-
-            if(aux2>=1){
-
-                contX++;
-            }
 
             BlueValor=(*Image).pixelColor(contX, contY).blue();
             RedValor=(*Image).pixelColor(contX, contY).red();
             GreenValor=(*Image).pixelColor(contX, contY).green();
+
+            cout<<"Pixel["<<contX1<<"]["<<contY1<<"]=("<<RedValor<<", " <<GreenValor<<", " <<BlueValor<<") "<<endl;
 
            vector <int>*AuxVector=new vector <int>;
 
@@ -248,13 +244,41 @@ void FlagImage::CreatePixeles2()
 
             MatrizPixels->push_back(*AuxVector);
 
-            delete AuxVector;
+           // delete AuxVector;
+
+            if(aux2>=1.0){
+
+                contX++;
+                cout<<aux2<<endl;
+                aux2=0.0;
+
+
+            }
+
+
+            aux2+=Width_;
+            contX1++;
+
+
 
 
 
            }
 
+
+      cout<<endl;
+
+      if(aux1>=1.0){
+
+          contY++;
+          aux1=0.0;
+
+
+      }
+      contY1++;
+      contX1=0;
       contX=0;
+      aux1+=Height_;
 
 
     }
@@ -314,7 +338,7 @@ void FlagImage::genTheTxtPixels()
         }
 
     }
-
+    cout << endl<<"Job Done"<<endl;
 
     escribir("MyFile.txt", MatrizLeds);
 
