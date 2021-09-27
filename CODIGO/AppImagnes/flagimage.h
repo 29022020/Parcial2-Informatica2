@@ -35,6 +35,9 @@ public:
 
     vector<vector <int>> *MatrizPixels;
 
+    vector<vector <int>> *MatrizPixels2;
+
+
     int getHeight() const;
 
     int getWidth() const;

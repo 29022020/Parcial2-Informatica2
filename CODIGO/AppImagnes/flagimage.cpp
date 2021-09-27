@@ -12,6 +12,8 @@ FlagImage::FlagImage(QString ruta)
 
     MatrizPixels = new vector<vector <int>>;
 
+    MatrizPixels2= new vector<vector <int>>;
+
     Width=Image->width();
     Height=Image->height();
 
@@ -361,17 +363,19 @@ void FlagImage::CreatePixeles3()
 
    //cout<<FaulPixelesHeight<<" | "<<FaulPixelesWidth<<endl;
 
+   int co=0;
+
    for(int i=0; i<16; i++){
 
-    //  cout<<endl<<"Colum: "<<i<<endl<<endl;
+      cout<<endl<<"Colum: "<<i<<endl<<endl;
 
-       for(int j=Width_; j<=getWidth(); j+=Width_){
+       for(int j=Width_; j<=getWidth() &&co!=16; j+=Width_){
 
          cout<<"Pixels["<<contX<<"]["<<contY1<<"]= ";
 
           if(j!=getWidth()-FaulPixelesWidth-1){
 
-         cout<<"1: ("<<contY<<", " <<LastValueW<<", " <<contY<<", " << j<<") "<<endl;
+       cout<<"1: ("<<contY<<", " <<LastValueW<<", " <<contY<<", " << j<<") "<<endl;
 
           PixelImage element(contY, LastValueW, contY, j, *Image, MatrizPixels);
           MatrizLeds[contX][contY]=element;
@@ -390,24 +394,28 @@ void FlagImage::CreatePixeles3()
 
           }
           LastValueW=j;
+          co++;
 
        }
 
        cout<<endl;
-       LastValueW=0;
+
 
 
       if(aux1>=1.0){
 
            contY++;
-            aux1=0.0;
+           aux1=0.0;
+           cout<<contY<<endl;
 
 
            }
         contX=0;
-        aux1+=Height_;
+        aux1+=Height_;     
         LastValueW=0;
         contY1++;
+
+        co=0;
 
    }
 

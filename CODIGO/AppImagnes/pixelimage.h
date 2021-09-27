@@ -37,6 +37,7 @@ private:
 
     int WidthPixel_End;
 
+
     vector <vector<int>> MyAreaOfPixeles; //Pixeles de mi area
 
     vector<int> MyColor;  //Pixel de representación
