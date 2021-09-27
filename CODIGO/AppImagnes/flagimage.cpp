@@ -12,14 +12,12 @@ FlagImage::FlagImage(QString ruta)
 
     MatrizPixels = new vector<vector <int>>;
 
-    MatrizPixels2= new vector<vector <int>>;
-
     Width=Image->width();
     Height=Image->height();
 
-    CreatePixeles3();
+    //CreatePixeles4();
 
-   //SelectMySize();
+   SelectMySize();
 
     genTheTxtPixels();
 
@@ -94,26 +92,22 @@ void FlagImage::SelectMySize()
 
     if(getWidth() <= 16 && getHeight() <= 16){
 
-
          CreatePixeles2();
-
 
     }else if(getWidth() > 16 && getHeight() > 16){
 
          CreatePixeles();
 
-
     }else if(getWidth() > 16 && getHeight() <= 16){
 
-
-
+            CreatePixeles3();
 
     } else if(getWidth() < 16 && getHeight() > 16){
 
-
+           CreatePixeles4();
 
     }
-=======
+
 
 
 }
@@ -163,7 +157,7 @@ void FlagImage::CreatePixeles()
 
           cout<<"0: ("<<LastValueH<<", " <<LastValueW<<", " <<i<<", " << j<<") "<<endl;
 
-          PixelImage element(LastValueH, LastValueW, i, j,*Image, MatrizPixels);
+          PixelImage element(LastValueH, LastValueW, i, j,*Image, MatrizPixels, 1);
           MatrizLeds[contX][contY]=element;
 
           contX++;
@@ -172,7 +166,7 @@ void FlagImage::CreatePixeles()
 
               cout<<"1: ("<<LastValueH<<", " <<LastValueW<<", " <<i<<", " << j+FaulPixelesWidth<<") "<<endl;
 
-              PixelImage element(LastValueH, LastValueW, i, j+FaulPixelesWidth,*Image, MatrizPixels);
+              PixelImage element(LastValueH, LastValueW, i, j+FaulPixelesWidth,*Image, MatrizPixels, 1);
               MatrizLeds[contX][contY]=element;
 
               contX++;
@@ -184,7 +178,7 @@ void FlagImage::CreatePixeles()
                         cout<<"2: ("<<LastValueH<<", " <<LastValueW<<", " <<i+FaulPixelesHeight<<", " << j<<") "<<endl;
 
 
-                        PixelImage element(LastValueH, LastValueW,i+FaulPixelesHeight, j,*Image, MatrizPixels);
+                        PixelImage element(LastValueH, LastValueW,i+FaulPixelesHeight, j,*Image, MatrizPixels, 1);
                         MatrizLeds[contX][contY]=element;
 
                         contX++;
@@ -195,7 +189,7 @@ void FlagImage::CreatePixeles()
 
              cout<<"3: ("<<LastValueH<<", " <<LastValueW<<", " <<i+FaulPixelesHeight<<", " << j+FaulPixelesWidth<<") ,";
 
-             PixelImage element(LastValueH, LastValueW, i+FaulPixelesHeight, j+FaulPixelesWidth, *Image, MatrizPixels);
+             PixelImage element(LastValueH, LastValueW, i+FaulPixelesHeight, j+FaulPixelesWidth, *Image, MatrizPixels, 1);
               MatrizLeds[contX][contY]=element;
 
               contX++;
@@ -364,8 +358,6 @@ void FlagImage::CreatePixeles3()
 
    cout<<getHeight()<<" | "<<getWidth()<<endl;
 
-   //cout<<FaulPixelesHeight<<" | "<<FaulPixelesWidth<<endl;
-
    int co=0;
 
    for(int i=0; i<16; i++){
@@ -380,7 +372,7 @@ void FlagImage::CreatePixeles3()
 
        cout<<"1: ("<<contY<<", " <<LastValueW<<", " <<contY<<", " << j<<") "<<endl;
 
-          PixelImage element(contY, LastValueW, contY, j, *Image, MatrizPixels);
+          PixelImage element(contY, LastValueW, contY, j, *Image, MatrizPixels,2);
           MatrizLeds[contX][contY]=element;
 
           contX++;
@@ -389,7 +381,7 @@ void FlagImage::CreatePixeles3()
 
             cout<<"2: ("<<LastValueH<<", " <<LastValueW<<", " <<contY<<", " << j+FaulPixelesWidth<<") "<<endl;
 
-              PixelImage element(contY, LastValueW, contY, j+FaulPixelesWidth, *Image, MatrizPixels);
+              PixelImage element(contY, LastValueW, contY, getWidth()-1, *Image, MatrizPixels,2);
               MatrizLeds[contX][contY]=element;
 
               contX++;
@@ -423,6 +415,105 @@ void FlagImage::CreatePixeles3()
    }
 
 
+
+
+}
+
+void FlagImage::CreatePixeles4()
+{
+   float Width_=float(getWidth())/16.0;
+
+   int Height_=getHeight()/16;
+
+   int FaulPixelesWidth=getWidth()%16;
+
+   int FaulPixelesHeight=getHeight()%16;
+
+   if(FaulPixelesHeight!=0){
+
+     FaulPixelesHeight+=-1;
+
+  }
+
+   int LastValueW=0;
+
+   int LastValueH=0;
+
+   int contX=0;
+
+   int contY=0;
+
+   int contX1=0;
+
+   int contY1=0;
+
+   float aux1=0;
+
+   float aux2=0;
+
+   if(FaulPixelesWidth!=0){
+
+       FaulPixelesWidth+=-1;
+   }
+
+   cout<<Width_<<" | "<<Height_<<endl<<endl;
+
+   cout<<getHeight()<<" | "<<getWidth()<<endl;
+
+   //cout<<FaulPixelesHeight<<" | "<<FaulPixelesWidth<<endl;
+
+   int co=0;
+
+   for(int i=Height_; i<=getHeight() &co!=16; i+= Height_){
+
+      cout<<endl<<"Colum: "<<i<<endl<<endl;
+
+       for(int j=0; j<16 ; j++){
+
+         cout<<"Pixels["<<contX1<<"]["<<contY1<<"]= ";
+
+          if(i!=getHeight()-FaulPixelesHeight-1){
+
+       cout<<"1: ("<<LastValueH<<", " <<contX<<", " <<i<<", " << contX<<") "<<endl;
+
+          PixelImage element(LastValueH, contX, i, contX, *Image, MatrizPixels,3);
+          MatrizLeds[contX][contY]=element;
+
+          }else if(i==getHeight()-FaulPixelesHeight-1){
+
+             cout<<"2: ("<<LastValueH<<", " <<contX<<", " <<i+FaulPixelesHeight<<", " << contX<<") "<<endl;
+
+              PixelImage element(LastValueH, contX, getHeight()-1, contX, *Image, MatrizPixels,3);
+              MatrizLeds[contX][contY]=element;
+
+
+          }
+          if(aux2>=1.0){
+
+              contX++;
+              cout<<"Enter"<<endl;
+              aux2=0.0;
+
+
+          }
+
+          aux2+=Width_;
+          contX1++;
+
+       }
+
+       cout<<endl;
+
+
+        contX=0;
+        contX1=0;
+        LastValueH=i;
+        contY1++;
+        co++;
+
+   }
+
+   cout<<"End"<<endl;
 
 
 }

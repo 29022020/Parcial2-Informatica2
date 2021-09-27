@@ -5,6 +5,7 @@
         <file>Imagenes/usa.png</file>
         <file>Imagenes/colombiasmall.png</file>
         <file>Imagenes/colombiaCase2.png</file>
-
+        <file>Imagenes/colombiaCase3.png</file>
+        <file>Imagenes/mexico.png</file>
     </qresource>
 </RCC>

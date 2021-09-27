@@ -12,7 +12,7 @@ void CreateTxt(QImage *im, string RedFile_, string BlueFile_, string GreenFile_)
 int main()
 {
 
-    QString filename=":/new/prefix1/Imagenes/colombiaCase2.png";
+    QString filename=":/new/prefix1/Imagenes/mexico.png";
 
 
     QImage im(filename);
