@@ -12,10 +12,14 @@ FlagImage::FlagImage(QString ruta)
 
     MatrizPixels = new vector<vector <int>>;
 
+    MatrizPixels2= new vector<vector <int>>;
+
     Width=Image->width();
     Height=Image->height();
 
-    CreatePixeles2();
+    CreatePixeles3();
+
+   //SelectMySize();
 
     genTheTxtPixels();
 
@@ -82,6 +86,36 @@ void FlagImage::CreateTxt(QImage *im, string RedFile_, string BlueFile_, string 
 
 
 
+
+}
+
+void FlagImage::SelectMySize()
+{
+
+    if(getWidth() <= 16 && getHeight() <= 16){
+
+
+         CreatePixeles2();
+
+
+    }else if(getWidth() > 16 && getHeight() > 16){
+
+         CreatePixeles();
+
+
+    }else if(getWidth() > 16 && getHeight() <= 16){
+
+
+
+
+    } else if(getWidth() < 16 && getHeight() > 16){
+
+
+
+    }
+=======
+
+
 }
 
 void FlagImage::CreatePixeles()
@@ -117,7 +151,7 @@ void FlagImage::CreatePixeles()
 
    cout<<FaulPixelesHeight<<" | "<<FaulPixelesWidth<<endl;
 
-   for(int i=Height_; i<=getHeight()-1; i+= Height_){
+   for(int i=Height_; i<=getHeight(); i+= Height_){
 
        cout<<endl<<"Colum: "<<i<<endl<<endl;
 
@@ -129,7 +163,7 @@ void FlagImage::CreatePixeles()
 
           cout<<"0: ("<<LastValueH<<", " <<LastValueW<<", " <<i<<", " << j<<") "<<endl;
 
-          PixelImage element(LastValueH, LastValueW, i, j, *Image, MatrizPixels);
+          PixelImage element(LastValueH, LastValueW, i, j,*Image, MatrizPixels);
           MatrizLeds[contX][contY]=element;
 
           contX++;
@@ -138,7 +172,7 @@ void FlagImage::CreatePixeles()
 
               cout<<"1: ("<<LastValueH<<", " <<LastValueW<<", " <<i<<", " << j+FaulPixelesWidth<<") "<<endl;
 
-              PixelImage element(LastValueH, LastValueW, i, j+FaulPixelesWidth, *Image, MatrizPixels);
+              PixelImage element(LastValueH, LastValueW, i, j+FaulPixelesWidth,*Image, MatrizPixels);
               MatrizLeds[contX][contY]=element;
 
               contX++;
@@ -150,7 +184,7 @@ void FlagImage::CreatePixeles()
                         cout<<"2: ("<<LastValueH<<", " <<LastValueW<<", " <<i+FaulPixelesHeight<<", " << j<<") "<<endl;
 
 
-                        PixelImage element(LastValueH, LastValueW, i+FaulPixelesHeight, j, *Image, MatrizPixels);
+                        PixelImage element(LastValueH, LastValueW,i+FaulPixelesHeight, j,*Image, MatrizPixels);
                         MatrizLeds[contX][contY]=element;
 
                         contX++;
@@ -283,6 +317,110 @@ void FlagImage::CreatePixeles2()
 
     }
 
+
+
+
+
+}
+
+void FlagImage::CreatePixeles3()
+{
+   int Width_=getWidth()/16;
+
+   float Height_=float(getHeight())/16.0;;
+
+   int FaulPixelesWidth=getWidth()%16;
+
+  // int FaulPixelesHeight=getHeight()%16;
+
+   //if(FaulPixelesHeight!=0){
+
+    // FaulPixelesHeight+=-1;
+
+  // }
+
+   int LastValueW=0;
+
+   int LastValueH=0;
+
+   int contX=0;
+
+   int contY=0;
+
+   int contX1=0;
+
+   int contY1=0;
+
+   float aux1=0;
+
+   float aux2=0;
+
+   if(FaulPixelesWidth!=0){
+
+       FaulPixelesWidth+=-1;
+   }
+
+   cout<<Width_<<" | "<<Height_<<endl<<endl;
+
+   cout<<getHeight()<<" | "<<getWidth()<<endl;
+
+   //cout<<FaulPixelesHeight<<" | "<<FaulPixelesWidth<<endl;
+
+   int co=0;
+
+   for(int i=0; i<16; i++){
+
+      cout<<endl<<"Colum: "<<i<<endl<<endl;
+
+       for(int j=Width_; j<=getWidth() &&co!=16; j+=Width_){
+
+         cout<<"Pixels["<<contX<<"]["<<contY1<<"]= ";
+
+          if(j!=getWidth()-FaulPixelesWidth-1){
+
+       cout<<"1: ("<<contY<<", " <<LastValueW<<", " <<contY<<", " << j<<") "<<endl;
+
+          PixelImage element(contY, LastValueW, contY, j, *Image, MatrizPixels);
+          MatrizLeds[contX][contY]=element;
+
+          contX++;
+
+          }else if(j==getWidth()-FaulPixelesWidth-1){
+
+            cout<<"2: ("<<LastValueH<<", " <<LastValueW<<", " <<contY<<", " << j+FaulPixelesWidth<<") "<<endl;
+
+              PixelImage element(contY, LastValueW, contY, j+FaulPixelesWidth, *Image, MatrizPixels);
+              MatrizLeds[contX][contY]=element;
+
+              contX++;
+
+
+          }
+          LastValueW=j;
+          co++;
+
+       }
+
+       cout<<endl;
+
+
+
+      if(aux1>=1.0){
+
+           contY++;
+           aux1=0.0;
+           cout<<contY<<endl;
+
+
+           }
+        contX=0;
+        aux1+=Height_;     
+        LastValueW=0;
+        contY1++;
+
+        co=0;
+
+   }
 
 
 

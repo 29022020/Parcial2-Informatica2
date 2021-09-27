@@ -11,7 +11,9 @@ string CharToString(char array[]);
 void CreateTxt(QImage *im, string RedFile_, string BlueFile_, string GreenFile_);
 int main()
 {
-    QString filename=":/new/prefix1/Imagenes/colombiasmall.png";
+
+    QString filename=":/new/prefix1/Imagenes/colombiaCase2.png";
+
 
     QImage im(filename);
 
@@ -59,7 +61,10 @@ int main()
     string BlueFile="";
     string GreemFile="";
 
-   CreateTxt(&im, RedFile, BlueFile, GreemFile);
+
+  // CreateTxt(&im, RedFile, BlueFile, GreemFile);
+
+
 
    FlagImage myImage(filename);
 
