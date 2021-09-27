@@ -86,6 +86,7 @@ void FlagImage::CreateTxt(QImage *im, string RedFile_, string BlueFile_, string 
 
 
 
+
 }
 
 void FlagImage::SelectMySize()
@@ -112,6 +113,8 @@ void FlagImage::SelectMySize()
 
 
     }
+=======
+
 
 }
 
