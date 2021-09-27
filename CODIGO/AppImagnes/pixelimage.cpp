@@ -47,6 +47,21 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
                    RedValor=MyImage.pixelColor(indx, indy).red();
                    GreenValor=MyImage.pixelColor(indx, indy).green();
 
+                   if(BlueValor==0 && RedValor==0 && GreenValor==0){
+
+                       BlueValor+=1;
+                       RedValor+=1;
+                       GreenValor+=1;
+                   }
+
+                   if(BlueValor==255 && RedValor==255 && GreenValor==255){
+
+                       BlueValor-=1;
+                       RedValor-=1;
+                       GreenValor-=1;
+                   }
+
+
                    vector <int>*AuxVector=new vector <int>;
 
                    AuxVector->push_back(RedValor);
@@ -77,6 +92,20 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
                 RedValor=MyImage.pixelColor(indx, indy).red();
                 GreenValor=MyImage.pixelColor(indx, indy).green();
 
+                if(BlueValor==0 && RedValor==0 && GreenValor==0){
+
+                    BlueValor+=10;
+                    RedValor+=10;
+                    GreenValor+=10;
+                }
+                if(BlueValor==255 && RedValor==255 && GreenValor==255){
+
+                    BlueValor-=1;
+                    RedValor-=1;
+                    GreenValor-=1;
+                }
+
+
                 vector <int>*AuxVector=new vector <int>;
 
                 AuxVector->push_back(RedValor);
@@ -103,6 +132,20 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
                     BlueValor=MyImage.pixelColor(indx, indy).blue();
                     RedValor=MyImage.pixelColor(indx, indy).red();
                     GreenValor=MyImage.pixelColor(indx, indy).green();
+
+                    if(BlueValor==0 && RedValor==0 && GreenValor==0){
+
+                        BlueValor+=10;
+                        RedValor+=10;
+                        GreenValor+=10;
+                    }
+                    if(BlueValor==255 && RedValor==255 && GreenValor==255){
+
+                        BlueValor-=1;
+                        RedValor-=1;
+                        GreenValor-=1;
+                    }
+
 
                     vector <int>*AuxVector=new vector <int>;
 

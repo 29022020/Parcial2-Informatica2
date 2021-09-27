@@ -144,12 +144,13 @@ void FlagImage::CreatePixeles()
    cout<<getHeight()<<" | "<<getWidth()<<endl;
 
    cout<<FaulPixelesHeight<<" | "<<FaulPixelesWidth<<endl;
-
-   for(int i=Height_; i<=getHeight(); i+= Height_){
+   int co=0;
+   int co1=0;
+   for(int i=Height_; i<=getHeight() && co!=16; i+= Height_){
 
        cout<<endl<<"Colum: "<<i<<endl<<endl;
 
-       for(int j=Width_; j<=getWidth(); j+=Width_){
+       for(int j=Width_; j<=getWidth() && co1!=16; j+=Width_){
 
           cout<<"Pixels["<<contX<<"]["<<contY<<"]= ";
 
@@ -198,6 +199,7 @@ void FlagImage::CreatePixeles()
           }
 
           LastValueW=j;
+          co1++;
 
           //contX++;
 
@@ -207,7 +209,8 @@ void FlagImage::CreatePixeles()
 
        cout<<endl;
 
-
+       co++;
+       co1=0;
        contX=0;
        contY++;
        LastValueH=i;
@@ -244,9 +247,9 @@ void FlagImage::CreatePixeles2()
 
     int contY1=0;
 
-    float aux1=0;
+    float aux1=Height_;
 
-    float aux2=0;
+    float aux2=Width_;
 
     int BlueValor, RedValor, GreenValor;
 
@@ -261,6 +264,21 @@ void FlagImage::CreatePixeles2()
             BlueValor=(*Image).pixelColor(contX, contY).blue();
             RedValor=(*Image).pixelColor(contX, contY).red();
             GreenValor=(*Image).pixelColor(contX, contY).green();
+
+
+            if(BlueValor==0 && RedValor==0 && GreenValor==0){
+
+                BlueValor+=1;
+                RedValor+=1;
+                GreenValor+=1;
+            }
+
+            if(BlueValor==255 && RedValor==255 && GreenValor==255){
+
+                BlueValor-=1;
+                RedValor-=1;
+                GreenValor-=1;
+            }
 
             cout<<"Pixel["<<contX1<<"]["<<contY1<<"]=("<<RedValor<<", " <<GreenValor<<", " <<BlueValor<<") "<<endl;
 

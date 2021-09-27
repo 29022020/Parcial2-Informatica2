@@ -3,6 +3,10 @@
 #include "RW_files.h"
 #include "flagimage.h"
 
+//////////////////////
+/*PONGA EN FRENTE DE LA DEFINICIÓN DE LA MACRO MY_FILE LA RUTA DE LA IMAGEN
+ */
+#define MY_FILE ":/new/prefix1/Imagenes/EnglandMayAlto.png"
 using namespace std;
 
 string CharToString(char array[]);
@@ -12,7 +16,7 @@ void CreateTxt(QImage *im, string RedFile_, string BlueFile_, string GreenFile_)
 int main()
 {
 
-    QString filename=":/new/prefix1/Imagenes/mexico.png";
+    QString filename=MY_FILE;
 
 
     QImage im(filename);
