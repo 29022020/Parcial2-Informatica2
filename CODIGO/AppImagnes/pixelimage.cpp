@@ -18,7 +18,21 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
 
     WidthPixel_End=WidthPixel_End_;
 
+    if(MyImage.height()==HeightPixel_End){
+
+         HeightPixel_End--;
+
+    }
+
+    if(MyImage.width()==WidthPixel_End){
+
+        WidthPixel_End--;
+
+    }
+
     int BlueValor, RedValor, GreenValor;
+
+
 
     for(int indy=HeightPixel_Init; indy<=HeightPixel_End; indy++){
 
@@ -34,10 +48,10 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
                    AuxVector->push_back(RedValor);
                    AuxVector->push_back(GreenValor);
                    AuxVector->push_back(BlueValor);     
-
-                   MyAreaOfPixeles.push_back(*AuxVector);
-
+                   cout<<"("<<RedValor<<", "<<GreenValor<<", "<<BlueValor<<")"<<endl;
                    delete AuxVector;
+
+
 
         }
 

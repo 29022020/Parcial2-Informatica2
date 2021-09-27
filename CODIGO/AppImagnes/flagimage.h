@@ -49,9 +49,13 @@ private:
 
     void CreateTxt(QImage *im, string RedFile_, string BlueFile_, string GreenFile_);
 
+    void SelectMySize();
+
     void CreatePixeles();//Crear la division areas dentro de la imagen
 
     void CreatePixeles2();
+
+    void CreatePixeles3();
 
     void genTheTxtPixels();
 
