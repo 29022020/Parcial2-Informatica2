@@ -5,7 +5,7 @@ PixelImage::PixelImage()
 
 }
 
-PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPixel_End_, int WidthPixel_End_, QImage &MyImage,  vector<vector <int>> *MatrizPixelsCopy_)
+PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPixel_End_, int WidthPixel_End_, QImage &MyImage,  vector<vector <int>> *MatrizPixelsCopy_, int MyType_)
 {
 
     cout<<"New Pixel"<<endl;
@@ -19,6 +19,7 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
     WidthPixel_End=WidthPixel_End_;
 
     MatrizPixelsCopy=MatrizPixelsCopy_;
+    MyType=MyType_;
 
     if(MyImage.height()==HeightPixel_End){
 
@@ -32,39 +33,12 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
 
     }
 
+
     int BlueValor, RedValor, GreenValor;
 
-    int indy=HeightPixel_Init;
+    if(MyType==1){
 
-         for(int indx=WidthPixel_Init; indx <=WidthPixel_End-1; indx++){
-
-
-                BlueValor=MyImage.pixelColor(indx, indy).blue();
-                RedValor=MyImage.pixelColor(indx, indy).red();
-                GreenValor=MyImage.pixelColor(indx, indy).green();
-
-                vector <int>*AuxVector=new vector <int>;
-
-                AuxVector->push_back(RedValor);
-                AuxVector->push_back(GreenValor);
-                AuxVector->push_back(BlueValor);
-
-                MyAreaOfPixeles.push_back(*AuxVector);
-
-               // cout<<"Pixel: "<<indy<<", "<<indx<<endl;
-              //  cout<<"("<<RedValor<<", "<<GreenValor<<", "<<BlueValor<<")"<<endl;
-
-                delete AuxVector;
-
-
-
-     }
-
-
-
-
-
-   /*for(int indy=HeightPixel_Init; indy<=HeightPixel_End; indy++){
+    for(int indy=HeightPixel_Init; indy<=HeightPixel_End; indy++){
 
             for(int indx=WidthPixel_Init; indx <=WidthPixel_End; indx++){
 
@@ -88,7 +62,66 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
 
         }
 
-    }*/
+    }
+
+    }
+
+    if(MyType==2){
+
+    int indy=HeightPixel_Init;
+
+         for(int indx=WidthPixel_Init; indx <=WidthPixel_End-1; indx++){
+
+
+                BlueValor=MyImage.pixelColor(indx, indy).blue();
+                RedValor=MyImage.pixelColor(indx, indy).red();
+                GreenValor=MyImage.pixelColor(indx, indy).green();
+
+                vector <int>*AuxVector=new vector <int>;
+
+                AuxVector->push_back(RedValor);
+                AuxVector->push_back(GreenValor);
+                AuxVector->push_back(BlueValor);
+
+                MyAreaOfPixeles.push_back(*AuxVector);
+
+               // cout<<"Pixel: "<<indy<<", "<<indx<<endl;
+               // cout<<"("<<RedValor<<", "<<GreenValor<<", "<<BlueValor<<")"<<endl;
+
+                delete AuxVector;
+
+     }
+
+     }
+    if(MyType==3){
+
+        int indx=WidthPixel_Init;
+
+             for(int indy=HeightPixel_Init; indy <=HeightPixel_End-1; indy++){
+
+
+                    BlueValor=MyImage.pixelColor(indx, indy).blue();
+                    RedValor=MyImage.pixelColor(indx, indy).red();
+                    GreenValor=MyImage.pixelColor(indx, indy).green();
+
+                    vector <int>*AuxVector=new vector <int>;
+
+                    AuxVector->push_back(RedValor);
+                    AuxVector->push_back(GreenValor);
+                    AuxVector->push_back(BlueValor);
+
+                    MyAreaOfPixeles.push_back(*AuxVector);
+
+                   // cout<<"Pixel: "<<indy<<", "<<indx<<endl;
+                   // cout<<"("<<RedValor<<", "<<GreenValor<<", "<<BlueValor<<")"<<endl;
+
+                    delete AuxVector;
+
+         }
+
+
+    }
+
 
     getMyColor();
 

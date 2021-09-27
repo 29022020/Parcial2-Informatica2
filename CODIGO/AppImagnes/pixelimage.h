@@ -21,11 +21,13 @@ public:
 
     PixelImage();
 
-    PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPixel_End_, int WidthPixel_End_, QImage &MyImage, vector<vector <int>> *MatrizPixelsCopy);
+    PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPixel_End_, int WidthPixel_End_, QImage &MyImage, vector<vector <int>> *MatrizPixelsCopy, int Type_);
 
     vector<int> getMyColor() const;
 
     vector<vector <int>> *MatrizPixelsCopy;
+
+    int MyType;
 
 private:
 

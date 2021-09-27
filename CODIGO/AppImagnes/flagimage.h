@@ -41,6 +41,7 @@ public:
 
     void ShowMyPixeles();
 
+
 private:
 
     int Height;
@@ -56,6 +57,8 @@ private:
     void CreatePixeles2();
 
     void CreatePixeles3();
+
+    void CreatePixeles4();
 
     void genTheTxtPixels();
 
