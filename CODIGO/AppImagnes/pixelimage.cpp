@@ -7,8 +7,17 @@ PixelImage::PixelImage()
 
 PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPixel_End_, int WidthPixel_End_, QImage &MyImage,  vector<vector <int>> *MatrizPixelsCopy_, int MyType_)
 {
-
-    cout<<"New Pixel"<<endl;
+    /*PixelImage: Constructor que recibe los extremos del area asinada para PixelImage, la informacion
+     * de la imagen a traves de la intacia de QImage, y el tipo de proceso de area a realzar.
+     * Para posteriomente analizar el area asignada, y definir el pixel de representacion del area dada.
+     *
+     *Tipo uno: proceso de submuestreo.
+     *
+     *Tipo dos: proceso de mayor ancho menor alto.
+     *
+     *Tipo tres: proceso de menor ancho mayor alto.
+     *
+     */
 
     HeightPixel_Init=HeightPixel_Init_;
 
@@ -19,6 +28,9 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
     WidthPixel_End=WidthPixel_End_;
 
     MatrizPixelsCopy=MatrizPixelsCopy_;
+
+    MyAreaOfPixeles=new vector <vector<int>>;
+
     MyType=MyType_;
 
     if(MyImage.height()==HeightPixel_End){
@@ -68,12 +80,9 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
                    AuxVector->push_back(GreenValor);
                    AuxVector->push_back(BlueValor);
 
-                   MyAreaOfPixeles.push_back(*AuxVector);
-                   //cout<<"Pixel: "<<indy<<", "<<indx<<endl;
-                   //cout<<"("<<RedValor<<", "<<GreenValor<<", "<<BlueValor<<")"<<endl;
+                   MyAreaOfPixeles->push_back(*AuxVector);
+
                    delete AuxVector;
-
-
 
         }
 
@@ -112,10 +121,7 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
                 AuxVector->push_back(GreenValor);
                 AuxVector->push_back(BlueValor);
 
-                MyAreaOfPixeles.push_back(*AuxVector);
-
-               // cout<<"Pixel: "<<indy<<", "<<indx<<endl;
-               // cout<<"("<<RedValor<<", "<<GreenValor<<", "<<BlueValor<<")"<<endl;
+                MyAreaOfPixeles->push_back(*AuxVector);
 
                 delete AuxVector;
 
@@ -153,10 +159,7 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
                     AuxVector->push_back(GreenValor);
                     AuxVector->push_back(BlueValor);
 
-                    MyAreaOfPixeles.push_back(*AuxVector);
-
-                   // cout<<"Pixel: "<<indy<<", "<<indx<<endl;
-                   // cout<<"("<<RedValor<<", "<<GreenValor<<", "<<BlueValor<<")"<<endl;
+                    MyAreaOfPixeles->push_back(*AuxVector);
 
                     delete AuxVector;
 
@@ -168,6 +171,8 @@ PixelImage::PixelImage(int HeightPixel_Init_, int WidthPixel_Init_, int HeightPi
 
     getMyColor();
 
+    delete MyAreaOfPixeles;
+
 }
 
 vector<int> PixelImage::getMyColor() const
@@ -178,6 +183,10 @@ vector<int> PixelImage::getMyColor() const
 bool PixelImage::comparateVector(vector<int> elemnt1, vector<int> elemnt2)
 {
 
+    /*comparateVector: compara si dos colores (representacion en un vector de tres valores enteros) son iguales.
+     *
+     *
+     */
     for(int i=0; i<3; i++){
 
         if(elemnt1.at(i)!=elemnt2.at(i)){
@@ -192,26 +201,29 @@ bool PixelImage::comparateVector(vector<int> elemnt1, vector<int> elemnt2)
 
 void PixelImage::getMyColor()
 {
+    /*getMyColor: Funcion que determina cual es color de represenatcion del area de pixeles
+     * utilizando instancias de la clase countColors, par saber cuantas veces se repite un color
+     * en el area.
+     *
+     */
 
     vector <int> aux;
 
     bool flag=true;
 
-    vector <countColors> ColorsArea;
+    vector <countColors> *ColorsArea=new vector <countColors>;
 
+    for(auto valor : *MyAreaOfPixeles){
 
-    for(auto valor : MyAreaOfPixeles){
+        if(!ColorsArea->empty()){
 
-        if(!ColorsArea.empty()){
-
-        for(auto value: ColorsArea){
+        for(auto value: *ColorsArea){
 
         if(comparateVector(value.getMyColor(), valor)){
 
                 value.setMyNumOfColors(value.getMyNumOfColors()+1);
 
                 flag=false;
-
         }
 
 
@@ -220,7 +232,8 @@ void PixelImage::getMyColor()
         if(flag){
 
             countColors element(valor);
-            ColorsArea.push_back(element);
+            ColorsArea->push_back(element);
+
 
         }
 
@@ -228,11 +241,10 @@ void PixelImage::getMyColor()
         else{
 
           countColors element(valor);
-          ColorsArea.push_back(element);
+          ColorsArea->push_back(element);
 
         }
 
-        flag=true;
 
     }
 
@@ -241,7 +253,7 @@ void PixelImage::getMyColor()
 
     bool flag2=true;
 
-    for(auto value : ColorsArea){
+    for(auto value : *ColorsArea){
 
         if(flag2){
 
@@ -261,40 +273,10 @@ void PixelImage::getMyColor()
 
     }
 
+    delete ColorsArea;
+
     MyColor=MyUniqueColor.getMyColor();
 
     MatrizPixelsCopy->push_back(MyColor);
-
-
-
-    int cont=1;
-
-    cout<<endl;
-
-
-    for(auto valou: MyColor){
-
-        if(cont==1){
-
-           cout<<endl<<endl<<"My color is: Red="<<valou<<endl;
-
-        }
-        if(cont==2){
-
-           cout<<endl<<endl<<"My color is: Green="<<valou<<endl;
-        }
-        if(cont==3){
-
-           cout<<endl<<endl<<"My color is: Blue="<<valou<<endl;
-
-        }
-        cont++;
-
-    }
-
-    cout<<endl;
-    cout<<endl;
-
-
 
 }

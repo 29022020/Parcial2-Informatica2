@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////
+///              CLASE RW_FILES_H
+///
+/// CLASE QUE RECIBE STRING Y LO ESCRIBE EN UN .TXT
+///
+/// FUNCION:
+/// -UNA VEZ SE LE DE EL NOMBRE O RUTA ENTRE "", Y LOS DATOS
+/// EN UNA VARIBALE STRING A ESCRIBIR, ESTE LO HARA Y ESCRIBIRA
+/// LA INFORMACION ASIGNADA.
+///
 #ifndef RW_FILES_H
 #define RW_FILES_H
 
@@ -9,8 +19,6 @@
 
 using namespace std;
 
-#endif // RWCHAR_H
-
 void escribir(string nombre, string contenido);
 
-string leer(string nombre);
+#endif // RWCHAR_H

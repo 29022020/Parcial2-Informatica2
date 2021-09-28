@@ -1,3 +1,16 @@
+///////////////////////////////////////////////////////////
+///                CLASE PIXELIMAGE
+///
+/// CLASE QUE RECIBE UNA AREA DE LA IMAGEN.
+///
+/// FUNCION:
+/// -SE LE ASIGNARÁ CIERTA AREA DE LA IMAGEN, Y LA INFORMACION
+/// DE LA IMAGEN POR MEDIO DE UNA INSTANCIA DE LA CLASE QIMAGE,
+/// PARA QUE ESTA POR MEDIO DE SUS METODOS Y ATRIBUTOS DETERIMINE
+/// CUAL ES COLOR EN TERMINO DE SUS VALORES CORRESPONDINTES RGB
+/// QUE REPRESENTA A ESA AREA (EL QUE MAS PREDOMINA).
+///
+
 #ifndef PIXELIMAGE_H
 #define PIXELIMAGE_H
 #include <iostream>
@@ -8,11 +21,6 @@
 #include <QImage>
 #include "countcolors.h"
 
-///////////////////////////////
-///
-///CLASE QUE VA A TENER EL AREA QUE SE LE ASIGNE DE LA IMAGEN
-/// PARA SABER CUAL ES EL COLOR EN TÉRMINOS DE VALORES RGB
-/// QUE MÁS PREDOMINA EN LA AREA ASIGNADA DE LA IMAGEN
 using namespace std;
 
 class PixelImage
@@ -40,7 +48,7 @@ private:
     int WidthPixel_End;
 
 
-    vector <vector<int>> MyAreaOfPixeles; //Pixeles de mi area
+    vector <vector<int>> *MyAreaOfPixeles; //Pixeles de mi area
 
     vector<int> MyColor;  //Pixel de representación
 
