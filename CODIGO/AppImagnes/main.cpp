@@ -13,7 +13,7 @@
  */
 ////////////////////////////////////////////////////////////////////////////////////////
 
-#define MY_FILE ":/new/prefix1/Imagenes/Flag_of_Brazil.svg.png"
+#define MY_FILE ""
 
 using namespace std;
 
