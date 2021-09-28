@@ -1,0 +1,40 @@
+///////////////////////////////////////////////////////////////////
+//                  IMPLEMENTACION DE TINKERCAD
+//
+// Desarrollo de una matriz de 16*16 Leds RGB, la cual será
+// llenada a partir de la información exportada desde la 
+// implentancion de Qt, donde despues de abrir el archivo .txt
+// se debe copiar toda la informacion contenida alli, para despues 
+// pegarla en el lugar correspondiente en este codigo para 
+// posteriormente ejecutar y ver la representacion de la imagen
+// en la interfaz de Leds de 16*16 implementada por nosotros.
+//
+///////////////////////////////////////////////////////////////////
+#include <Adafruit_NeoPixel.h>
+
+#define LED_PIN 2
+
+#define LED_COUNT 256
+
+Adafruit_NeoPixel leds(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
+
+
+void setup(){
+ 
+  leds.begin();
+
+  ////En frente de  byte matrizpixels[257][3]= pegar la información exportada por el programa.
+ 
+  byte matrizpixels[257][3]=
+    
+  for(int i=0; i<256; i++){
+   
+     leds.setPixelColor(i,  matrizpixels[i][0], matrizpixels[i][1], matrizpixels[i][2]);
+
+  }
+ 
+  leds.show();
+  
+}
+
+void loop(){}
