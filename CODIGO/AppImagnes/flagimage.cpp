@@ -463,7 +463,7 @@ void FlagImage::genTheTxtPixels()
 
     cout<<"============================================================================"<<endl;
 
-    //////////ACA PUEDE CAMBIAR EL NOMBRE Y LA RUTA//////////
+    //////////ACA PUEDE CAMBIAR EL NOMBRE Y LA RUTA AÑADIENDO DESPUES DE LA RUTA EL NOMBRE DEL ARCHIVO + .txt//////////
               escribir("MyFile.txt", MatrizLeds);
 
 
