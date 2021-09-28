@@ -1,3 +1,15 @@
+///////////////////////////////////////////////////////////
+///              CLASE COUNTCOLORS
+///
+/// CLASE AUXILIAR QUE AYUDA A PIXELIMAGE; EN BUSQUEDA DEL
+/// COLOR REPRESENATCIÓN.
+///
+/// FUNCION:
+/// -SE LE ASIGNA UN VECTOR QUE CORRESPONDE A UN COLOR RGB
+/// Y UNA VARIABLE QUE DERTEMINARA EL NUMERO DE VECES QUE
+/// SE ENCUENTRA ESE COLOR EN EL AREA.
+///
+
 #ifndef COUNTCOLORS_H
 #define COUNTCOLORS_H
 
@@ -5,11 +17,7 @@
 #include <vector>
 
 using namespace std;
-/////////////
-/// \brief The countColors class
-///CLASE QUE AYUDA AL PIXEL EN LA BUSQUEDA
-/// DEL PIXEL DE REPRENTACIÓN
-///
+
 class countColors
 {
 public:

@@ -7,6 +7,13 @@ FlagImage::FlagImage()
 
 FlagImage::FlagImage(QString ruta)
 {
+    /*FlagImage: Constructor de clae, que una vez se le da ruta de la imagen
+     * crea una isntacia de la clase QImage, analiza las dimensiones de la imagen
+     * y decide que metodo emplear(sobremuestreo, submuestreo, combinados) usar
+     * para hacer la transformacion de la imagen a 16*16 pixeles, y exportar
+     * esta informacion en un .txt, para seguir con el proceso de muestreo.
+     *
+     */
 
     Image=new QImage(ruta);
 
@@ -15,9 +22,13 @@ FlagImage::FlagImage(QString ruta)
     Width=Image->width();
     Height=Image->height();
 
-    //CreatePixeles4();
+    cout<<"============================================================================"<<endl;
 
-   SelectMySize();
+    cout<<endl<<"                  Iniciando transformacion de la Imagen."<<endl<<endl;
+
+    cout<<"============================================================================"<<endl;
+
+    SelectMySize();
 
     genTheTxtPixels();
 
@@ -33,62 +44,23 @@ int FlagImage::getWidth() const
     return Width;
 }
 
-void FlagImage::ShowMyPixeles()
-{
-
-    for(int i=0; i<16; i++){
-
-        for(int j=0; j<16; j++){
-
-            //cout<<"Pixel["<<i<<"]["<<j<<"]= "<<MatrizLeds.at(i).at(j).getMyColor().at(0)<<endl;
-
-        }
-    }
-}
-
-void FlagImage::CreateTxt(QImage *im, string RedFile_, string BlueFile_, string GreenFile_)
-{
-    for(int indx=0; indx<(*im).width(); indx++){
-
-        for(int indy=0; indy <(*im).height(); indy++){
-
-            if(indy!=((*im).height()-1)){
-
-                RedFile_+=to_string((*im).pixelColor(indx, indy).red())+'-';
-                BlueFile_+=to_string((*im).pixelColor(indx, indy).blue())+'-';
-                GreenFile_+=to_string((*im).pixelColor(indx, indy).green())+'-';
-
-            }
-            else{
-
-                RedFile_+=to_string((*im).pixelColor(indx, indy).red());
-                BlueFile_+=to_string((*im).pixelColor(indx, indy).blue());
-                GreenFile_+=to_string((*im).pixelColor(indx, indy).green());
-
-            }
-
-        }
-        if(indx!=(*im).width()-1){
-
-        RedFile_+='\n';
-        BlueFile_+='\n';
-        GreenFile_+='\n';
-
-        }
-
-    }
-
-    escribir("Red_file.txt", RedFile_);
-    escribir("Blue_file.txt", BlueFile_);
-    escribir("Green_file.txt", GreenFile_);
-
-
-
-
-}
-
 void FlagImage::SelectMySize()
 {
+    /*SelectMySize: funcion que analiza las dimensiones de la imagen:
+     *
+     * -Si la imagen tiene mayor ancho y alto a 16, entonces emplea
+     * el metodo de submuestreo.
+     *
+     * -Si la imagen  tiene ancho y alto mayor
+     * o igual 16 realiza metodo de sobremuestreo.
+     *
+     * -Si el ancho es mayor a 16 pero no su alto, emplea un metodo
+     * combinado.
+     *
+     * -Si el alto es mayor a 16 pero no su ancho, emplea un metodo
+     * combinado.
+     *
+     */
 
     if(getWidth() <= 16 && getHeight() <= 16){
 
@@ -108,12 +80,17 @@ void FlagImage::SelectMySize()
 
     }
 
-
-
 }
 
 void FlagImage::CreatePixeles()
 {
+    /*CreatePixeles:  (submuestreo puro) Se divide el total del area de la imagen
+     * en una matriz de 16*16, donde cada porsion de area se le asigna
+     * a una instancia de la clase PixelImage, para que determine cual
+     * es el pixel de representacion del area y sea almacenado en un vector
+     * de la clase FlagImage
+     *
+     */
    int Width_=getWidth()/16;
 
    int Height_=getHeight()/16;
@@ -139,23 +116,14 @@ void FlagImage::CreatePixeles()
 
    int contY=0;
 
-   cout<<Width_<<" | "<<Height_<<endl<<endl;
+   int co=0;
+   int co1=0;
 
-   cout<<getHeight()<<" | "<<getWidth()<<endl;
+   for(int i=Height_; i<=getHeight() && co!=16; i+= Height_){
 
-   cout<<FaulPixelesHeight<<" | "<<FaulPixelesWidth<<endl;
-
-   for(int i=Height_; i<=getHeight(); i+= Height_){
-
-       cout<<endl<<"Colum: "<<i<<endl<<endl;
-
-       for(int j=Width_; j<=getWidth(); j+=Width_){
-
-          cout<<"Pixels["<<contX<<"]["<<contY<<"]= ";
+       for(int j=Width_; j<=getWidth() && co1!=16; j+=Width_){
 
           if(j!=getWidth()-FaulPixelesWidth-1 && i!=getHeight()-FaulPixelesHeight-1){
-
-          cout<<"0: ("<<LastValueH<<", " <<LastValueW<<", " <<i<<", " << j<<") "<<endl;
 
           PixelImage element(LastValueH, LastValueW, i, j,*Image, MatrizPixels, 1);
           MatrizLeds[contX][contY]=element;
@@ -163,8 +131,6 @@ void FlagImage::CreatePixeles()
           contX++;
 
           }else if(j==getWidth()-FaulPixelesWidth-1 && i!=getHeight()-FaulPixelesHeight-1){
-
-              cout<<"1: ("<<LastValueH<<", " <<LastValueW<<", " <<i<<", " << j+FaulPixelesWidth<<") "<<endl;
 
               PixelImage element(LastValueH, LastValueW, i, j+FaulPixelesWidth,*Image, MatrizPixels, 1);
               MatrizLeds[contX][contY]=element;
@@ -175,9 +141,6 @@ void FlagImage::CreatePixeles()
           }
           else if(j!=getWidth()-FaulPixelesWidth-1 && i==getHeight()-FaulPixelesHeight-1){
 
-                        cout<<"2: ("<<LastValueH<<", " <<LastValueW<<", " <<i+FaulPixelesHeight<<", " << j<<") "<<endl;
-
-
                         PixelImage element(LastValueH, LastValueW,i+FaulPixelesHeight, j,*Image, MatrizPixels, 1);
                         MatrizLeds[contX][contY]=element;
 
@@ -186,11 +149,8 @@ void FlagImage::CreatePixeles()
 
            }else if(j==getWidth()-FaulPixelesWidth-1 && i==getHeight()-FaulPixelesHeight-1){
 
-
-             cout<<"3: ("<<LastValueH<<", " <<LastValueW<<", " <<i+FaulPixelesHeight<<", " << j+FaulPixelesWidth<<") ,";
-
              PixelImage element(LastValueH, LastValueW, i+FaulPixelesHeight, j+FaulPixelesWidth, *Image, MatrizPixels, 1);
-              MatrizLeds[contX][contY]=element;
+             MatrizLeds[contX][contY]=element;
 
               contX++;
 
@@ -198,16 +158,12 @@ void FlagImage::CreatePixeles()
           }
 
           LastValueW=j;
-
-          //contX++;
-
-
+          co1++;
 
        }
 
-       cout<<endl;
-
-
+       co++;
+       co1=0;
        contX=0;
        contY++;
        LastValueH=i;
@@ -223,34 +179,26 @@ void FlagImage::CreatePixeles()
 
 void FlagImage::CreatePixeles2()
 {
+    /*CreatePixeles2: (sobremuestreo puro) Se divide el total del area de la imagen
+     * en una matriz de 16*16, como las areas son diminutas se asigna el mismos valor del pixel
+     * hasta que el iterador sea mayor a uno, para hacer que la imagen pequeña tenga las dimensiones
+     * de 16*16.
+     *
+     */
 
-    float Width_=float(getWidth())/16.0;  //0.75
+    float Width_=float(getWidth())/16.0;
 
-    float Height_=float(getHeight())/16.0;  //0.5
-
-    float FaulPixelesWidth=getWidth()%16;
-
-    float FaulPixelesHeight=getHeight()%16;
-
-    int LastValueW=0;
-
-    int LastValueH=0;
+    float Height_=float(getHeight())/16.0;
 
     int contX=0;
 
     int contY=0;
 
-    int contX1=0;
+    float aux1=Height_;
 
-    int contY1=0;
-
-    float aux1=0;
-
-    float aux2=0;
+    float aux2=Width_;
 
     int BlueValor, RedValor, GreenValor;
-
-    cout<<Width_<<"||"<<Height_<<endl;
 
     for(int i=1; i<=16; i++){
 
@@ -262,7 +210,20 @@ void FlagImage::CreatePixeles2()
             RedValor=(*Image).pixelColor(contX, contY).red();
             GreenValor=(*Image).pixelColor(contX, contY).green();
 
-            cout<<"Pixel["<<contX1<<"]["<<contY1<<"]=("<<RedValor<<", " <<GreenValor<<", " <<BlueValor<<") "<<endl;
+
+            if(BlueValor==0 && RedValor==0 && GreenValor==0){
+
+                BlueValor+=1;
+                RedValor+=1;
+                GreenValor+=1;
+            }
+
+            if(BlueValor==255 && RedValor==255 && GreenValor==255){
+
+                BlueValor-=1;
+                RedValor-=1;
+                GreenValor-=1;
+            }
 
            vector <int>*AuxVector=new vector <int>;
 
@@ -272,29 +233,16 @@ void FlagImage::CreatePixeles2()
 
             MatrizPixels->push_back(*AuxVector);
 
-           // delete AuxVector;
-
             if(aux2>=1.0){
 
                 contX++;
-                cout<<aux2<<endl;
                 aux2=0.0;
-
 
             }
 
-
             aux2+=Width_;
-            contX1++;
-
-
-
-
 
            }
-
-
-      cout<<endl;
 
       if(aux1>=1.0){
 
@@ -303,74 +251,49 @@ void FlagImage::CreatePixeles2()
 
 
       }
-      contY1++;
-      contX1=0;
+
       contX=0;
       aux1+=Height_;
 
-
     }
-
-
-
-
 
 }
 
 void FlagImage::CreatePixeles3()
 {
+    /*CreatePixeles3: (caso combinado mayor ancho, menor alto ) Se divide el total del area de la imagen
+     * en una matriz de 16*16, como las areas horizonatles son mayores, para el area vertical se asigna el mismo
+     * pixel hasta que el iterador no note un cambio de pixel, se le lleva esta area de 1*n a una instacia de la clase
+     * PixelImage para que determine el pixel representacion del area hasta determinar los valores de la matriz de 16*16.
+     *
+     */
+
    int Width_=getWidth()/16;
 
    float Height_=float(getHeight())/16.0;;
 
    int FaulPixelesWidth=getWidth()%16;
 
-  // int FaulPixelesHeight=getHeight()%16;
-
-   //if(FaulPixelesHeight!=0){
-
-    // FaulPixelesHeight+=-1;
-
-  // }
-
    int LastValueW=0;
-
-   int LastValueH=0;
 
    int contX=0;
 
    int contY=0;
 
-   int contX1=0;
-
-   int contY1=0;
-
    float aux1=0;
-
-   float aux2=0;
 
    if(FaulPixelesWidth!=0){
 
        FaulPixelesWidth+=-1;
    }
 
-   cout<<Width_<<" | "<<Height_<<endl<<endl;
-
-   cout<<getHeight()<<" | "<<getWidth()<<endl;
-
    int co=0;
 
    for(int i=0; i<16; i++){
 
-      cout<<endl<<"Colum: "<<i<<endl<<endl;
-
        for(int j=Width_; j<=getWidth() &&co!=16; j+=Width_){
 
-         cout<<"Pixels["<<contX<<"]["<<contY1<<"]= ";
-
           if(j!=getWidth()-FaulPixelesWidth-1){
-
-       cout<<"1: ("<<contY<<", " <<LastValueW<<", " <<contY<<", " << j<<") "<<endl;
 
           PixelImage element(contY, LastValueW, contY, j, *Image, MatrizPixels,2);
           MatrizLeds[contX][contY]=element;
@@ -379,13 +302,10 @@ void FlagImage::CreatePixeles3()
 
           }else if(j==getWidth()-FaulPixelesWidth-1){
 
-            cout<<"2: ("<<LastValueH<<", " <<LastValueW<<", " <<contY<<", " << j+FaulPixelesWidth<<") "<<endl;
-
               PixelImage element(contY, LastValueW, contY, getWidth()-1, *Image, MatrizPixels,2);
               MatrizLeds[contX][contY]=element;
 
-              contX++;
-
+          contX++;
 
           }
           LastValueW=j;
@@ -393,39 +313,33 @@ void FlagImage::CreatePixeles3()
 
        }
 
-       cout<<endl;
-
-
-
       if(aux1>=1.0){
 
            contY++;
            aux1=0.0;
-           cout<<contY<<endl;
-
 
            }
         contX=0;
         aux1+=Height_;     
         LastValueW=0;
-        contY1++;
 
         co=0;
 
    }
 
-
-
-
 }
 
 void FlagImage::CreatePixeles4()
 {
+    /*CreatePixeles3: (caso combinado mayor alto, menor ancho ) Se divide el total del area de la imagen
+     * en una matriz de 16*16, como las areas verticales son mayores, para el area horizontal se asigna el mismo
+     * pixel hasta que el iterador no note un cambio de pixel, se le lleva esta area de 1*n a una instacia de la clase
+     * PixelImage para que determine el pixel representacion del area hasta determinar los valores de la matriz de 16*16.
+     *
+     */
    float Width_=float(getWidth())/16.0;
 
    int Height_=getHeight()/16;
-
-   int FaulPixelesWidth=getWidth()%16;
 
    int FaulPixelesHeight=getHeight()%16;
 
@@ -435,8 +349,6 @@ void FlagImage::CreatePixeles4()
 
   }
 
-   int LastValueW=0;
-
    int LastValueH=0;
 
    int contX=0;
@@ -447,41 +359,20 @@ void FlagImage::CreatePixeles4()
 
    int contY1=0;
 
-   float aux1=0;
-
    float aux2=0;
-
-   if(FaulPixelesWidth!=0){
-
-       FaulPixelesWidth+=-1;
-   }
-
-   cout<<Width_<<" | "<<Height_<<endl<<endl;
-
-   cout<<getHeight()<<" | "<<getWidth()<<endl;
-
-   //cout<<FaulPixelesHeight<<" | "<<FaulPixelesWidth<<endl;
 
    int co=0;
 
-   for(int i=Height_; i<=getHeight() &co!=16; i+= Height_){
-
-      cout<<endl<<"Colum: "<<i<<endl<<endl;
+   for(int i=Height_; i<=getHeight() && co!=16; i+= Height_){
 
        for(int j=0; j<16 ; j++){
 
-         cout<<"Pixels["<<contX1<<"]["<<contY1<<"]= ";
-
           if(i!=getHeight()-FaulPixelesHeight-1){
-
-       cout<<"1: ("<<LastValueH<<", " <<contX<<", " <<i<<", " << contX<<") "<<endl;
 
           PixelImage element(LastValueH, contX, i, contX, *Image, MatrizPixels,3);
           MatrizLeds[contX][contY]=element;
 
           }else if(i==getHeight()-FaulPixelesHeight-1){
-
-             cout<<"2: ("<<LastValueH<<", " <<contX<<", " <<i+FaulPixelesHeight<<", " << contX<<") "<<endl;
 
               PixelImage element(LastValueH, contX, getHeight()-1, contX, *Image, MatrizPixels,3);
               MatrizLeds[contX][contY]=element;
@@ -491,7 +382,6 @@ void FlagImage::CreatePixeles4()
           if(aux2>=1.0){
 
               contX++;
-              cout<<"Enter"<<endl;
               aux2=0.0;
 
 
@@ -502,9 +392,6 @@ void FlagImage::CreatePixeles4()
 
        }
 
-       cout<<endl;
-
-
         contX=0;
         contX1=0;
         LastValueH=i;
@@ -513,20 +400,23 @@ void FlagImage::CreatePixeles4()
 
    }
 
-   cout<<"End"<<endl;
-
 
 }
 
 void FlagImage::genTheTxtPixels()
 {
+    /*genTheTxtPixels: Utiliza el vector MatrizPixels para crear un formato
+     * de un matriz de enteros de [256][3], a cadenas de strings correspondintes
+     * a la representacion de la imagen transformada a 16*16 pixeles, para posteriormente
+     * escribir esta informacion en el archivo que se guardara en la carpeta build del
+     * proyecto con el nombre de MyFile.txt, informacion que sera llevada a Tinkercad.
+     *
+     */
     string MatrizLeds="";
 
     int contX=0;
 
     int contY=0;
-
-
 
     for(auto value: *MatrizPixels){
 
@@ -555,7 +445,6 @@ void FlagImage::genTheTxtPixels()
 
         }
 
-
         contX++;
 
         if(contY==16){
@@ -567,9 +456,15 @@ void FlagImage::genTheTxtPixels()
         }
 
     }
-    cout << endl<<"Job Done"<<endl;
 
-    escribir("MyFile.txt", MatrizLeds);
+    delete MatrizPixels;
+
+    cout<<endl<<"          Exportacion de transformacion de la imagen completada."<<endl<<endl;
+
+    cout<<"============================================================================"<<endl;
+
+    //////////ACA PUEDE CAMBIAR EL NOMBRE Y LA RUTA//////////
+              escribir("MyFile.txt", MatrizLeds);
 
 
 
